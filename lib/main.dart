@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:splashscreen/splashscreen.dart';
+import 'main_page.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ThetaMedBot',
+      
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        
+        primarySwatch: Colors.teal,//Colors.teal,
+        primaryColor: Colors.teal[100],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: SplashScreen(seconds: 15,navigateAfterSeconds: MainPage(),image: Image.asset("assets/logo_thetamedbot_text.png") ,backgroundColor: Color(0xffe3fdfd),photoSize: 130,),
+    
     );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
