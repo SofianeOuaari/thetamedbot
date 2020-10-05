@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "957552064831",
+    "firebase_url": "https://thetamedbot.firebaseio.com",
+    "project_id": "thetamedbot",
+    "storage_bucket": "thetamedbot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957552064831:android:8ba5859e7480e96c3dbb8a",
+        "android_client_info": {
+          "package_name": "com.kushapps.thetamedbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957552064831-1cnufcma6ceu9vkurrlvrlut2lebcvpr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kushapps.thetamedbot",
+            "certificate_hash": "2233a75079b25617698789112f3f6f3ab6a4eba2"
+          }
+        },
+        {
+          "client_id": "957552064831-slqt79in2vu5jk03sem8otbarq6ftk6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0xpbuA3ZGBSIrZLN6WpynP1dKaHDsTHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957552064831-slqt79in2vu5jk03sem8otbarq6ftk6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
