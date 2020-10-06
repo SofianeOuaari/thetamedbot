@@ -18,4 +18,9 @@ A few resources to get you started if this is your first project:
 
 - flutter pub run build_runner build --delete-conflicting-outputs
 
+# useful commands for it
+
+- git add *
+- git commit -m "my first commit"
+
 
