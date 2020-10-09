@@ -18,9 +18,31 @@ A few resources to get you started if this is your first project:
 
 - flutter pub run build_runner build --delete-conflicting-outputs
 
-# useful commands for it
+# useful commands for git
 
 - git add *
 - git commit -m "my first commit"
+- git checkout <branchname>
+- git branch -d <branchname> (Delete Feature Branch - Please don't delete master branch)
+- git push origin <branchname> (Push the branch to your remote repository, so others can use it)
+- git diff <sourcebranch> <targetbranch> (View all the merge conflicts)
+- git config --global user.name "Kush Vatsa" (Use your name in your git config)
+- git config --global user.email "kushvatsa007@gmail.com" (Use your email address in git config)
+  
+# Branch naming conventions
+
+- Use grouping tokens (words) at the beginning of your branch names.
+- Define and use short lead tokens to differentiate branches in a way that is meaningful to your workflow.
+- Use slashes to separate parts of your branch names.
+- Do not use bare numbers as leading parts.
+- Avoid long descriptive names for long-lived branches.
+- Do not use your personal name.  
+  
+## NOTE
+1. PLEASE MAKE A NEW BRANCH.
+2. PUSH YOUR CODE TO GITHUB.
+3. OPEN A PULL REQUEST.
+  
+  
 
 
