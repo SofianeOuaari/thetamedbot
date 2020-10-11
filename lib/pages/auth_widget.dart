@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:thetamedbot/models/myuser.dart';
-import 'package:thetamedbot/pages/login_page/login_page.dart';
-import 'home_page/home_page.dart';
+import 'package:thetamedbot/pages/home_page/home_page.dart';
+import 'package:thetamedbot/pages/signin_page/signin_page.dart';
 
 class AuthWidget extends StatelessWidget {
   const AuthWidget({Key key, @required this.userSnapshot}) : super(key: key);
@@ -14,7 +14,7 @@ class AuthWidget extends StatelessWidget {
       if (userSnapshot.hasData) {
         return HomePage(userSnapshot: userSnapshot);
       } else {
-        return LoginPage();
+        return SignInPage();
       }
     }
     return Scaffold(
