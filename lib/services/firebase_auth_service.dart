@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:thetamedbot/interfaces/firebase_auth_interface.dart';
 import 'package:thetamedbot/models/myuser.dart';
 
 class FirebaseAuthService implements AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   MyUser _userFromFirebase(User user) {
     if (user == null) {
@@ -16,7 +13,8 @@ class FirebaseAuthService implements AuthService {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
-        photoUrl: user.photoURL);
+        photoUrl: user.photoURL,
+        emailVerified: user.emailVerified);
   }
 
   @override
@@ -25,25 +23,31 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<MyUser> signInWithGoogle() async {
+  Future<MyUser> signInWithEmailAndPassword(
+      String email, String password) async {
     UserCredential userCredential;
-
-    if (kIsWeb) {
-      GoogleAuthProvider googleProvider = GoogleAuthProvider();
-      userCredential = await _firebaseAuth.signInWithPopup(googleProvider);
-    } else {
-      final GoogleSignInAccount googleUser = await googleSignIn.signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final GoogleAuthCredential googleAuthCredential =
-          GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      userCredential =
-          await _firebaseAuth.signInWithCredential(googleAuthCredential);
-    }
+    userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
     return _userFromFirebase(userCredential.user);
+  }
+
+  @override
+  Future<MyUser> createUserWithEmailAndPassword(
+      String email, String password) async {
+    UserCredential userCredential;
+    userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    return _userFromFirebase(userCredential.user);
+  }
+
+  @override
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
+  Future<void> verifyEmailSend() async {
+    await _firebaseAuth.currentUser.sendEmailVerification();
   }
 
   @override
@@ -54,12 +58,7 @@ class FirebaseAuthService implements AuthService {
 
   @override
   Future<void> signOut() async {
-    //await googleSignIn.signOut();
-    return await _firebaseAuth.signOut();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
+    await _firebaseAuth.signOut();
+    return _userFromFirebase(null);
   }
 }
