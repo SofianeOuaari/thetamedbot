@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thetamedbot/models/myuser.dart';
-import 'package:thetamedbot/services/firebase_auth_service.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key, @required this.userSnapshot}) : super(key: key);
@@ -16,14 +15,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Home Page"),
+          title: Text("Home"),
           actions: [
             IconButton(
-              icon: const Icon(Icons.backspace_outlined),
-              tooltip: 'Log out',
+              icon: const Icon(FontAwesomeIcons.user),
+              tooltip: 'Profile',
               onPressed: () async {
-                final auth = context.read<FirebaseAuthService>();
-                await auth.signOut();
+                Navigator.pushNamed(context, "/acc");
               },
             ),
           ],
