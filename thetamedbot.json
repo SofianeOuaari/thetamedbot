@@ -1,0 +1,52 @@
+{
+  "Users": {
+    "RmMAa2e1ejRPVlQ6aVOO": {
+      "user_email": "thetamedbot@gmail.com",
+      "user_medical_institution": "ThetaMedBot",
+      "user_name": "Med Assistant",
+      "user_password": "password123"
+    },
+    "RmMAa2e1ejRPVlQ6aVO1": { 
+    }
+    
+  },
+  "Image": {
+    "D5q0mf0riCl416Ishidj": {
+      "diagnose_type": "Pneumotorax",
+      "extention": "png",
+      "features": "[0.1, 0.45, 0.234, 0 ...]",
+      "img_name": "img.png",
+      "img_source": "your/path/to/dir",
+      "loaded_model": "Models/DL_Malaria"
+    }
+    
+  },
+  "Models": {
+    "DL_Malaria": {
+      "model_name": "Pneumotorax",
+      "model_path": "../../.."
+    }
+    
+  },
+  "Diagnoses": {
+    "pO5xGaLUf93G144DfsCz": {
+      "diagnose_prediction_result": 95,
+      "diagnose_result": "Not infected",
+      "diagnose_type": "Malaria",
+      "id_doctor": "Users/RmMAa2e1ejRPVlQ6aVOO",
+      "image_id": "Image/D5q0mf0riCl416Ishidj",
+      "patient_name": "Mister X"
+    }
+  },
+  "Logs":{
+    "SJaUWZRdff0v00X6F210": {
+      "date": "October 21, 2020 at 12:00:00 PM UTC+2",
+      "last_step": "signin",
+      "user_id": "Users/SJaUWZRdff0v00X6F210"
+    }
+  }
+  
+  
+  
+  
+}
