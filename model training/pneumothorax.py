@@ -52,3 +52,43 @@ x_train_image =np.array(x_train_image)
 if success:
   print("data loaded successfully!")
 print(x_train_image.shape)
+
+
+
+#   loading test data
+test_data=[]
+print("loading test data for non-infected cases :\n")
+path = "/content/drive/My Drive/colab/dataset/chestXRay/cleaned ches-X Ray/test/0"
+images_paths = glob.glob(path +"*.png") + glob.glob(path +"*.jpg")
+for img in images_paths:
+        image = cv2.imread(img)
+        image = cv2.resize(image,(length,length));
+        image = image / np.max(image)
+        image = image.astype(np.float32)
+        imageEntity = {"image" : image,"status" : 0}
+        test_data.append(imageEntity)
+print("loading test data for infected cases :\n")
+path = "/content/drive/My Drive/colab/dataset/chestXRay/cleaned ches-X Ray/test/1"
+images_paths = glob.glob(path +"*.png") + glob.glob(path +"*.jpg")
+for img in images_paths:
+        image = cv2.imread(img)
+        image = cv2.resize(image,(length,length));
+        image = image / np.max(image)
+        image = image.astype(np.float32)
+        imageEntity = {"image" : image,"status" : 1}
+        test_data.append(imageEntity)
+
+
+x_test_image =[]
+y_test = []
+
+for i in test_data:
+    x_test_image.append(i['image'])
+    y_test.append(i['status'])
+
+
+#y_test = np_utils.to_categorical(y_test)   
+x_test_image =np.array(x_test_image)
+if success:
+  print("test data loaded successfully!")
+print(x_test_image.shape)
