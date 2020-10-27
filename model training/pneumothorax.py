@@ -1,10 +1,13 @@
 # mounting the drive cloud for loading the dataset and saving the resaults
 from google.colab import drive
 drive.mount('/content/drive')
+!pip install -q keras
+!pip install opencv-python
 
 # importing the needed libraries
 import glob
 import cv2
+import os
 import numpy as np
 from keras.utils import np_utils
 from keras.models import Sequential
@@ -14,41 +17,27 @@ from keras.losses import categorical_crossentropy
 success=True;
 
 # loading the dataset from the drive
-length=100;
-data = []
-print("loading training data for non-infected cases :\n")
-
-path = "./dataset/chestXRay/cleaned ches-X Ray/train/0"
-images_paths = glob.glob(path +"*.png") + glob.glob(path +"*.jpg")
-for img in images_paths:
-        image = cv2.imread(img)
-        image = cv2.resize(image,(length,length));
-        image = image / np.max(image)
-        image = image.astype(np.float32)
-        imageEntity = {"image" : image,"status" : 0}
-        data.append(imageEntity)
-print("loading training data for infected cases :\n")
-path = "./dataset/chestXRay/cleaned ches-X Ray/train/1"
-images_paths = glob.glob(path +"*.png") + glob.glob(path +"*.jpg")
-for img in images_paths:
-        image = cv2.imread(img)
-        image = cv2.resize(image,(length,length));
-        image = image / np.max(image)
-        image = image.astype(np.float32)
-        imageEntity = {"image" : image,"status" : 1}
-        data.append(imageEntity)
-
-
-x_train_image =[]
-y_train = []
-
-for i in data:
-    x_train_image.append(i['image'])
-    y_train.append(i['status'])
-
-
-#y_train= np_utils.to_categorical(y_train)   
-x_train_image =np.array(x_train_image)
-if success:
-  print("data loaded successfully!")
-print(x_train_image.shape)
+train_path="/content/drive/My Drive/colab/dataset/chestXRay/cleaned ches-X Ray/train"
+test_path="/content/drive/My Drive/colab/dataset/chestXRay/cleaned ches-X Ray/test"
+categories=["0","1"]
+train_image=[]
+train_label=[]
+size=300
+for category in categories:
+  path=os.path.join(train_path,category) #path to the train folder
+  for img in os.listdir(path):
+    image_array=cv2.imread(os.path.join(path,img),cv2.IMREAD_GRAYSCALE)
+    img = cv2.resize(image_array,(size,size))
+    train_image.append(img)
+    train_label.append(category)
+	
+	
+test_image=[]
+test_label=[]
+for category in categories:
+  path=os.path.join(test_path,category) #path to the train folder
+  for img in os.listdir(path):
+    image_array=cv2.imread(os.path.join(path,img),cv2.IMREAD_GRAYSCALE)
+    img = cv2.resize(image_array,(size,size))
+    test_image.append(img)
+    test_label.append(category)
