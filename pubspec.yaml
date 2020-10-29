@@ -15,7 +15,6 @@ dependencies:
   firebase_core: ^0.5.1
   cloud_firestore: ^0.14.2
   cloud_functions: ^0.6.0+1
-  firebase_ml_vision: ^0.9.8
   firebase_database: ^4.2.0
   firebase_auth: ^0.18.2
   tflite: ^1.1.1
