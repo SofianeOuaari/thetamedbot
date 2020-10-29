@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thetamedbot/services/firebase_auth_service.dart';
 import 'package:provider/provider.dart';
+import '../description_page/description.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -153,7 +154,10 @@ class _SignInPageState extends State<SignInPage> {
                   SizedBox(width: 5.0),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, '/sup');
+                      //Navigator.pushNamed(context, '/sup');
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                        return DescriptionPage();
+                      }));
                     },
                     child: Text(
                       'Register',
