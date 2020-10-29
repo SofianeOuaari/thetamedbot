@@ -1,0 +1,153 @@
+@startuml
+set namespaceSeparator ::
+
+abstract class "thetamedbot::interfaces::firebase_auth_interface.dart::AuthService" {
+  +Stream<MyUser> onUserStateChanged
+  +Future currentUser()
+  +Future signInWithEmailAndPassword()
+  +Future createUserWithEmailAndPassword()
+  +Future sendPasswordResetEmail()
+  +Future verifyEmailSend()
+  +Future signOut()
+}
+
+"thetamedbot::interfaces::firebase_auth_interface.dart::AuthService" o-- "dart::async::Stream<MyUser>"
+
+class "thetamedbot::main.dart::MyApp" {
+  +_MyAppState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thetamedbot::main.dart::MyApp"
+
+class "thetamedbot::main.dart::_MyAppState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "thetamedbot::main.dart::_MyAppState"
+
+class "thetamedbot::models::myuser.dart::MyUser" {
+  +String uid
+  +String email
+  +String photoUrl
+  +String displayName
+  +bool emailVerified
+}
+
+class "thetamedbot::pages::acc_page::acc_page.dart::AccPage" {
+  +AsyncSnapshot<MyUser> userSnapshot
+  +_AccPageState createState()
+}
+
+"thetamedbot::pages::acc_page::acc_page.dart::AccPage" o-- "flutter::src::widgets::async.dart::AsyncSnapshot<MyUser>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thetamedbot::pages::acc_page::acc_page.dart::AccPage"
+
+class "thetamedbot::pages::acc_page::acc_page.dart::_AccPageState" {
+  -GlobalKey<ScaffoldState> _scaffoldKey
+  +Widget build()
+  +double changePadX()
+}
+
+"thetamedbot::pages::acc_page::acc_page.dart::_AccPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "thetamedbot::pages::acc_page::acc_page.dart::_AccPageState"
+
+class "thetamedbot::pages::auth_widget.dart::AuthWidget" {
+  +AsyncSnapshot<MyUser> userSnapshot
+  +Widget build()
+}
+
+"thetamedbot::pages::auth_widget.dart::AuthWidget" o-- "flutter::src::widgets::async.dart::AsyncSnapshot<MyUser>"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thetamedbot::pages::auth_widget.dart::AuthWidget"
+
+class "thetamedbot::pages::auth_widget_builder.dart::AuthWidgetBuilder" {
+  +Widget Function(BuildContext, AsyncSnapshot<MyUser>) builder
+  +Widget build()
+}
+
+"thetamedbot::pages::auth_widget_builder.dart::AuthWidgetBuilder" o-- "thetamedbot::pages::auth_widget_builder.dart::Widget Function(BuildContext, AsyncSnapshot<MyUser>)"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thetamedbot::pages::auth_widget_builder.dart::AuthWidgetBuilder"
+
+class "thetamedbot::pages::home_page::home_page.dart::HomePage" {
+  +AsyncSnapshot<MyUser> userSnapshot
+  +_HomePageState createState()
+}
+
+"thetamedbot::pages::home_page::home_page.dart::HomePage" o-- "flutter::src::widgets::async.dart::AsyncSnapshot<MyUser>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thetamedbot::pages::home_page::home_page.dart::HomePage"
+
+class "thetamedbot::pages::home_page::home_page.dart::_HomePageState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "thetamedbot::pages::home_page::home_page.dart::_HomePageState"
+
+class "thetamedbot::pages::signin_page::signin_page.dart::SignInPage" {
+  +_SignInPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thetamedbot::pages::signin_page::signin_page.dart::SignInPage"
+
+class "thetamedbot::pages::signin_page::signin_page.dart::_SignInPageState" {
+  -GlobalKey<ScaffoldState> _scaffoldKey
+  -GlobalKey<FormState> _formKey
+  -GlobalKey<FormFieldState> _emailKey
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  +Widget build()
+  +void dispose()
+  -dynamic _signInEP()
+  -dynamic _forgotPassword()
+}
+
+"thetamedbot::pages::signin_page::signin_page.dart::_SignInPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"thetamedbot::pages::signin_page::signin_page.dart::_SignInPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"thetamedbot::pages::signin_page::signin_page.dart::_SignInPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormFieldState>"
+"thetamedbot::pages::signin_page::signin_page.dart::_SignInPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "thetamedbot::pages::signin_page::signin_page.dart::_SignInPageState"
+
+class "thetamedbot::pages::signin_page::signup_page.dart::SignUpPage" {
+  +_SignUpPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thetamedbot::pages::signin_page::signup_page.dart::SignUpPage"
+
+class "thetamedbot::pages::signin_page::signup_page.dart::_SignUpPageState" {
+  -GlobalKey<ScaffoldState> _scaffoldKey
+  -GlobalKey<FormState> _formKey
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  +Widget build()
+  +void dispose()
+  -dynamic _signUpEP()
+}
+
+"thetamedbot::pages::signin_page::signup_page.dart::_SignUpPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"thetamedbot::pages::signin_page::signup_page.dart::_SignUpPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"thetamedbot::pages::signin_page::signup_page.dart::_SignUpPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "thetamedbot::pages::signin_page::signup_page.dart::_SignUpPageState"
+
+class "thetamedbot::services::firebase_auth_service.dart::FirebaseAuthService" {
+  -FirebaseAuth _firebaseAuth
+  +Stream<MyUser> onUserStateChanged
+  -MyUser _userFromFirebase()
+  +Future signInWithEmailAndPassword()
+  +Future createUserWithEmailAndPassword()
+  +Future sendPasswordResetEmail()
+  +Future verifyEmailSend()
+  +Future currentUser()
+  +Future signOut()
+}
+
+"thetamedbot::services::firebase_auth_service.dart::FirebaseAuthService" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"thetamedbot::services::firebase_auth_service.dart::FirebaseAuthService" o-- "dart::async::Stream<MyUser>"
+"thetamedbot::interfaces::firebase_auth_interface.dart::AuthService" <|-- "thetamedbot::services::firebase_auth_service.dart::FirebaseAuthService"
+
+class "thetamedbot::services::loader_service.dart::LoaderService" {
+  -bool _isLoad
+  +bool isLoad
+  +dynamic changeIsLoad()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "thetamedbot::services::loader_service.dart::LoaderService"
+
+
+@enduml
